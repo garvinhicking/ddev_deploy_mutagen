@@ -74,3 +74,4 @@ echo "$MUTAGEN_TEMPLATE" > .ddev/mutagen/mutagen.yml
 
 echo "[+] Wrote .ddev/mutagen/mutagen.yml"
 
+echo "[i] You should run 'ddev poweroff && ddev mutagen reset && ddev start' now."
