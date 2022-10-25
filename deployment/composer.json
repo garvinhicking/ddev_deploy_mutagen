@@ -1,0 +1,22 @@
+{
+  "name": "faktore/deployment",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://composer.typo3.org/"
+    }
+  ],
+  "require": {
+    "typo3/surf": "2.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Faktore\\Surf\\": "composer/faktore/typo3-surf-tasks/src/"
+    }
+  },
+  "config": {
+    "platform": {
+      "php": "8.1"
+    }
+  }
+}

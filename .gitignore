@@ -1,0 +1,16 @@
+.idea/
+vagrant/.vagrant
+htdocs/vendor
+/*.sql
+
+
+/deployment/workspace/*
+!/deployment/workspace/.gitignore
+!/deployment/workspace/README.txt
+
+htdocs/web/index.php
+htdocs/web/typo3
+htdocs/web/typo3temp
+htdocs/var
+
+.ddev/docker-compose.mutagen.yml
