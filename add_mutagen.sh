@@ -65,8 +65,8 @@ sync:
 
     # This is the actual reason for a custom mutagen.yml file:
     permissions:
-      defaultFileMode: 0644
-      defaultDirectoryMode: 0755
+      defaultFileMode: "0644"
+      defaultDirectoryMode: "0755"
 EOF
 );
 
