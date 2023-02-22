@@ -7,12 +7,7 @@
     }
   ],
   "require": {
-    "typo3/surf": "2.3"
-  },
-  "autoload": {
-    "psr-4": {
-      "Faktore\\Surf\\": "composer/faktore/typo3-surf-tasks/src/"
-    }
+    "typo3/surf": "3.3"
   },
   "config": {
     "platform": {
