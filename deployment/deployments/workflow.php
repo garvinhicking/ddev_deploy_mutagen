@@ -161,11 +161,6 @@ $deployment->onInitialize(function() use ($deployment, $application, $configurat
         'Faktore\\Surf\\DefinedTask\\Gulp\\LocalBuildTask',
         $application
     );
-    $workflow->beforeTask(
-        'TYPO3\\Surf\\Task\\SymlinkReleaseTask',
-        'Faktore\\Surf\\Task\\TYPO3\\CMS\\UpdateTranslationsTask',
-        $application
-    );
 
     if (isset($configuration['resetWebCache']) && $configuration['resetWebCache']) {
         // TODO: APC reset script
