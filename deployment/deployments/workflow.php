@@ -6,10 +6,12 @@
 // option for it and make it abstracted.
 
 
+if (!isset($configuration) || !is_array($configuration)) {
+    die('This script is not meant to be called on its own.');
+}
 
-
-
-
+// $deployment comes from the overlying architecture!
+/** @var \TYPO3\Surf\Domain\Model\Deployment $deployment */
 
 // Check CONTEXT
 if (isset($configuration['typo3Context']) && !empty($configuration['typo3Context'])) {
@@ -35,9 +37,6 @@ if (isset($sshParts[1])) {
     $hostName = $sshParts[0];
 }
 
-/** @var \TYPO3\Surf\Domain\Model\Deployment $deployment */
-$workflow = new \TYPO3\Surf\Domain\Model\SimpleWorkflow();
-
 // Setup deployment target
 $liveNode = new \TYPO3\Surf\Domain\Model\Node($environment);
 $liveNode->setHostname($hostName)
@@ -45,7 +44,7 @@ $liveNode->setHostname($hostName)
     ->setOption('privateKeyFile', $configuration['_sshKey']);
 
 // Propagate configuration values to SURF Options
-$application = new \TYPO3\Surf\Application\TYPO3\CMS($configuration['applicationName']);
+$application = new \TYPO3\Surf\Application\TYPO3\CMS();
 $application->addNode($liveNode)
     ->setOption('useApplicationWorkspace',      $configuration['_useApplicationWorkspace'])
     ->setOption('phpBinaryPathAndFilename',     $configuration['phpBinary'])
@@ -70,55 +69,68 @@ $application->addNode($liveNode)
 
     ->setOption(
         'scriptBasePath',
-        \TYPO3\Flow\Utility\Files::concatenatePaths([$deployment->getWorkspacePath($application), 'htdocs/web'])
+        \TYPO3\Flow\Utility\Files::concatenatePaths([$deployment->getWorkspacePath($application), $configuration['webDirectory']])
     )
     ->setDeploymentPath($configuration['deploymentPath']);
 
 $deployment->addApplication($application);
 
-$workflow->defineTask(
-    'Faktore\\Surf\\DefinedTask\\Node\\LocalInstallTask',
-    'TYPO3\\Surf\\Task\\LocalShellTask', ['command' => $configuration['npmInstallCommand']]
-);
-$workflow->defineTask(
-    'Faktore\\Surf\\DefinedTask\\Gulp\\LocalBuildTask',
-    'TYPO3\\Surf\\Task\\LocalShellTask', ['command' => $configuration['frontendBuildCommand']]
-);
-
 // Stitch Symlinks
 $symlinks = [];
 if (isset($configuration['symlinks']) && is_array($configuration['symlinks'])) {
     foreach($configuration['symlinks'] AS $symlinkFrom => $symlinkTo) {
-        $symlinks[] = "ln -sf " . $configuration['deploymentPath'] . $symlinkFrom . " " . $deployment->getApplicationReleasePath($application) . $symlinkTo;
+        $symlinks[] = "ln -sf " . $configuration['deploymentPath'] . $symlinkFrom . " " . $deployment->getApplicationReleasePath($liveNode) . $symlinkTo;
     }
 }
 
-$workflow->defineTask(
-    'Faktore\\Surf\\DefinedTask\\Node\\EnvironmentSymLinkTask',
-    'TYPO3\\Surf\\Task\\ShellTask',
-    [
-        'command' => $symlinks
-    ]
-);
+if (isset($configuration['keepTYPO3Caches'])) {
+    $varParts = ['log', 'session', 'lock', 'charset', 'transient'];
 
-// This is a possible debugging task to allow executing remote commands before a
-// rollback is performed. Move it to after/beforeStage where needed.
-$workflow->defineTask(
-    'Faktore\\Surf\\DefinedTask\\DebugTask',
-    'TYPO3\\Surf\\Task\\ShellTask',
-    [
-        'command' =>
-            [
-                "sleep " . $configuration['_sleepDebugTimeout'],
-            ]
+    foreach($varParts AS $varPart) {
+        // Remove directory that may have been created due to TYPO3 console on deployment stage. The directory would be empty. Should be no harm done. Blame Lars if it did. ;)
+        $symlinks[] = "rm -rf " . $deployment->getApplicationReleasePath($liveNode) . "/" . $configuration['webDirectory'] . "/var/" . $varPart;
 
-    ]
-);
+        // If this is a first deployment, the shared/Data/var/ directory with its subdirectories might not yet exist, so create it in that case
+        $symlinks[] = "mkdir -p " . $deployment->getApplicationReleasePath($liveNode) . "/" . $configuration['sharedDirectory'] . "/var/" . $varPart;
 
-/** @var \TYPO3\Surf\Domain\Model\Deployment $deployment */
-$deployment->setWorkflow($workflow);
+        // Now attach the symlink from shared to DocRoot.
+        $symlinks[] = "ln -sf " . $configuration['deploymentPath'] . $configuration['sharedDirectory'] . "/var/" . $varPart . " " . $deployment->getApplicationReleasePath($liveNode) . "/" . $configuration['webDirectory'] . "/var/" . $varPart;
+    }
+}
 
-$deployment->onInitialize(function() use ($workflow, $application, $configuration) {
+$deployment->onInitialize(function() use ($deployment, $application, $configuration, $symlinks) {
+    $workflow = $deployment->getWorkflow();
+
+    $workflow->defineTask(
+        'Faktore\\Surf\\DefinedTask\\Node\\LocalInstallTask',
+        'TYPO3\\Surf\\Task\\LocalShellTask', ['command' => $configuration['npmInstallCommand']]
+    );
+    $workflow->defineTask(
+        'Faktore\\Surf\\DefinedTask\\Gulp\\LocalBuildTask',
+        'TYPO3\\Surf\\Task\\LocalShellTask', ['command' => $configuration['frontendBuildCommand']]
+    );
+
+    $workflow->defineTask(
+        'Faktore\\Surf\\DefinedTask\\Node\\EnvironmentSymLinkTask',
+        'TYPO3\\Surf\\Task\\ShellTask',
+        [
+            'command' => $symlinks
+        ]
+    );
+
+    // This is a possible debugging task to allow executing remote commands before a
+    // rollback is performed. Move it to after/beforeStage where needed.
+    $workflow->defineTask(
+        'Faktore\\Surf\\DefinedTask\\DebugTask',
+        'TYPO3\\Surf\\Task\\ShellTask',
+        [
+            'command' =>
+                [
+                    "sleep " . $configuration['_sleepDebugTimeout'],
+                ]
+
+        ]
+    );
 
     // Inject custom SymlinkTask
     $workflow->afterTask(
@@ -154,7 +166,13 @@ $deployment->onInitialize(function() use ($workflow, $application, $configuratio
         'Faktore\\Surf\\Task\\TYPO3\\CMS\\UpdateTranslationsTask',
         $application
     );
+
+    if (isset($configuration['resetWebCache']) && $configuration['resetWebCache']) {
+        // TODO: APC reset script
+        $workflow->beforeStage('transfer', \TYPO3\Surf\Task\Php\WebOpcacheResetCreateScriptTask::class, $application)
+            ->afterStage('switch', \TYPO3\Surf\Task\Php\WebOpcacheResetExecuteTask::class, $application);
+
+        // TODO: Respect HTTPAuthDeployment credentials for calling.
+    }
 });
 
-/** @var \TYPO3\Surf\Domain\Model\Deployment $deployment */
-$deployment->setWorkflow($workflow);

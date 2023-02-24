@@ -18,7 +18,7 @@ $configuration = [
     // The remote GIT repository to clone as a base for the deployment
     // Surf need read access for this repository e.g. by setting a deploy key in the GitHub repository settings
     'repositoryUrl'             => 'git@github.com:garvinhicking/ddev_deploy_mutagen.git',
-    'gitBranch'                 => 'master',
+    'gitBranch'                 => 'surf', // usually: production, staging, development, feature/XXX
 
     // If empty, will be deduced from filename (i.e. "Production.Production.php")
     'typo3Context'              => 'Production/Production',
@@ -32,6 +32,7 @@ $configuration = [
 
     // The webDirectory represents your document root relative to the deployment path, not the application root (check VirtualHost!)
     'webDirectory'              => 'htdocs/',
+    'sharedDirectory'           => 'shared/Data/',
 
     // Path and filename to the PHP binary. Make sure to set the correct version if multiple PHP versions are available on the machine
     'phpBinary'                 => '/usr/bin/php',
@@ -40,19 +41,19 @@ $configuration = [
     'typo3ConsoleBinary'        => 'vendor/bin/typo3cms',
 
     // UGC symlinks, using available placeholders:
-    //
+    // {sharedDirectory}, {webDirectory}
     'symlinks'                  => [
-        "shared/Data/.env"
+        "{sharedDirectory}/.env"
         => "/.env",
 
-        "shared/Data/fileadmin"
-        =>"/htdocs/fileadmin",
+        "{sharedDirectory}/fileadmin"
+        =>"/{webDirectory}/fileadmin",
 
-        "shared/Data/uploads"
-        => "/htdocs/uploads",
+        "{sharedDirectory}/uploads"
+        => "/{webDirectory}/uploads",
 
-        "shared/Data/AdditionalConfiguration.Credentials.php"
-        => "/htdocs/typo3conf/AdditionalConfiguration.Credentials.php",
+        "{sharedDirectory}//AdditionalConfiguration.Credentials.php"
+        => "/{webDirectory}/typo3conf/AdditionalConfiguration.Credentials.php",
     ],
 
     // A list of files and folder to exclude during transfer to the target machine
@@ -72,6 +73,14 @@ $configuration = [
     // The number of releases to keep when a new deployment is performed
     // Older releases will be deleted during the cleanup process of the deployment cycle
     'keepReleases'              => 3,
+
+    // Whether to call a PHP script via URL that is able to reset a OpCode Cache (APC)
+    'resetWebCache'             => true,
+    // For staging environments, the call may use HTTP authentication, that can be entered here.
+    'HTTPAuthDeployment'        => 'user:pass',
+
+    // If enabled, TYPO3 caches in the var/ directory will be symlinked instead of contained within a deployment
+    'keepTYPO3Caches'           => true,
 
     // The NPM install command. Usually you don't have to change anything here
     'npmInstallCommand'         => 'cd {workspacePath}/frontend && npm install 2>&1',
