@@ -63,7 +63,7 @@ $configuration = [
         '/.gitignore',
         '/vagrant',
         '/deployment',
-        '/deployment_target'
+        '/deployment_target',
         '/shared',
         '/migration',
         '/build',
