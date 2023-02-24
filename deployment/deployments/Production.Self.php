@@ -90,6 +90,22 @@ $configuration = [
     'frontendBuildCommand'      => 'cd {workspacePath}/frontend && npm run build --force 2>&1 && cp -r dist {workspacePath} 2>&1',
     // If there is no frontend build chain, just use 'true' here
 
+    // Ability to adjust directory/file ownership after deployment
+    // TODO: Implement this
+    /*
+    'enforceGroupOwnership'     => [
+        'www-group' => [
+            '/var/*',
+            '{webDirectory}/typo3temp'
+        ]
+    ],
+    'enforceOwnership'     => [
+        'www-data' => [
+            '/'
+        ]
+    ],
+    */
+
     // ===================================================================
     // From here on those are variables that usually do not need changing.
     // ===================================================================
