@@ -20,3 +20,6 @@ deployment/vendor/
 .ddev/docker-compose.mutagen.yml
 
 deployment_target/releases/20*
+deployment_target/releases/next
+deployment_target/releases/previous
+deployment_target/.surf

@@ -44,7 +44,7 @@ $liveNode->setHostname($hostName)
     ->setOption('privateKeyFile', $configuration['_sshKey']);
 
 // Propagate configuration values to SURF Options
-$application = new \TYPO3\Surf\Application\TYPO3\CMS();
+$application = new \TYPO3\Surf\Application\TYPO3\CMS($configuration['applicationName']);
 $application->addNode($liveNode)
     ->setOption('useApplicationWorkspace',      $configuration['_useApplicationWorkspace'])
     ->setOption('phpBinaryPathAndFilename',     $configuration['phpBinary'])

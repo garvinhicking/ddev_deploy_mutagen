@@ -11,13 +11,13 @@
 // ddev exec "cd deployment && vendor/bin/surf deploy Production.Self"
 
 $configuration = [
-    // This is just a name which describes the deployed application (used for verbose output, logfiles)
+    // This is just a name which describes the deployed application (used for verbose output, logfiles - no special characters please)
     'applicationName'           => 'typo3-surf',
     'baseUrl'                   => 'https://deployment.typo3-surf.ddev.site',
 
     // The remote GIT repository to clone as a base for the deployment
     // Surf need read access for this repository e.g. by setting a deploy key in the GitHub repository settings
-    'repositoryUrl'             => 'git@github.com:garvinhicking/ddev_deploy_mutagen.git',
+    'repositoryUrl'             => 'https://github.com/garvinhicking/ddev_deploy_mutagen.git', // usually: 'git@github.com/faktore-git/project.git
     'gitBranch'                 => 'surf', // usually: production, staging, development, feature/XXX
 
     // If empty, will be deduced from filename (i.e. "Production.Production.php")
