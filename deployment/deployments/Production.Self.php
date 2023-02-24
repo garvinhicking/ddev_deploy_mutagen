@@ -87,7 +87,7 @@ $configuration = [
     // The NPM install command. Usually you don't have to change anything here
     'npmInstallCommand'         => 'cd {workspacePath}/frontend && npm install 2>&1',
     // The frontend build chain command. Usually only have to adjust the path to the build tool and the build command
-    'frontendBuildCommand'      => 'cd {workspacePath}/frontend && npm run build --force 2>&1',
+    'frontendBuildCommand'      => 'cd {workspacePath}/frontend && npm run build --force 2>&1 && cp -r dist {workspacePath} 2>&1',
     // If there is no frontend build chain, just use 'true' here
 
     // ===================================================================

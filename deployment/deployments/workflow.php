@@ -79,7 +79,10 @@ $deployment->addApplication($application);
 $symlinks = [];
 if (isset($configuration['symlinks']) && is_array($configuration['symlinks'])) {
     foreach($configuration['symlinks'] AS $symlinkFrom => $symlinkTo) {
-        $symlinks[] = "ln -sf " . $configuration['deploymentPath'] . $symlinkFrom . " " . $deployment->getApplicationReleasePath($liveNode) . $symlinkTo;
+        $symlinkFrom = str_replace(['{sharedDirectory}', '{webDirectory}'], [$configuration['sharedDirectory'], $configuration['webDirectory']], $symlinkFrom);
+        $symlinkTo   = str_replace(['{sharedDirectory}', '{webDirectory}'], [$configuration['sharedDirectory'], $configuration['webDirectory']], $symlinkTo);
+
+        $symlinks[]  = "ln -sf " . $configuration['deploymentPath'] . $symlinkFrom . " " . $deployment->getApplicationReleasePath($liveNode) . $symlinkTo;
     }
 }
 
