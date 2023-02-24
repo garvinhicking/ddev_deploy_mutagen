@@ -79,8 +79,8 @@ $deployment->addApplication($application);
 $symlinks = [];
 if (isset($configuration['symlinks']) && is_array($configuration['symlinks'])) {
     foreach($configuration['symlinks'] AS $symlinkFrom => $symlinkTo) {
-        $symlinkFrom = str_replace(['{sharedDirectory}', '{webDirectory}'], [$configuration['sharedDirectory'], $configuration['webDirectory']], $symlinkFrom);
-        $symlinkTo   = str_replace(['{sharedDirectory}', '{webDirectory}'], [$configuration['sharedDirectory'], $configuration['webDirectory']], $symlinkTo);
+        $symlinkFrom = replacePathPlaceholders($symlinkFrom);
+        $symlinkTo   = replacePathPlaceholders($symlinkTo);
 
         $symlinks[]  = "ln -sf " . $configuration['deploymentPath'] . $symlinkFrom . " " . $deployment->getApplicationReleasePath($liveNode) . $symlinkTo;
     }
@@ -98,6 +98,22 @@ if (isset($configuration['keepTYPO3Caches'])) {
 
         // Now attach the symlink from shared to DocRoot.
         $symlinks[] = "ln -sf " . $configuration['deploymentPath'] . $configuration['sharedDirectory'] . "/var/" . $varPart . " " . $deployment->getApplicationReleasePath($liveNode) . "/" . $configuration['webDirectory'] . "/var/" . $varPart;
+    }
+}
+
+if (isset($configuration['enforceGroupOwnership'])) {
+    foreach($configuration['enforceGroupOwnership'] AS $owner => $artefacts) {
+        foreach($artefacts AS $artefact) {
+            $symlinks[] = "chgrp -R " . $owner . " " . $deployment->getApplicationReleasePath($liveNode) . "/" . replacePathPlaceholders($artefact);
+        }
+    }
+}
+
+if (isset($configuration['enforceOwnership'])) {
+    foreach($configuration['enforceOwnership'] AS $owner => $artefacts) {
+        foreach($artefacts AS $artefact) {
+            $symlinks[] = "chown -R " . $owner . " " . $deployment->getApplicationReleasePath($liveNode) . "/" . replacePathPlaceholders($artefact);
+        }
     }
 }
 
@@ -187,3 +203,10 @@ $deployment->onInitialize(function() use ($deployment, $application, $configurat
     }
 });
 
+
+function replacePathPlaceholders($directory): string
+{
+    global $configuration;
+
+    return str_replace(['{sharedDirectory}', '{webDirectory}'], [$configuration['sharedDirectory'], $configuration['webDirectory']], $directory);
+}
