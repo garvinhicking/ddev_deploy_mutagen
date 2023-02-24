@@ -166,11 +166,24 @@ $deployment->onInitialize(function() use ($deployment, $application, $configurat
     );
 
     if (isset($configuration['resetWebCache']) && $configuration['resetWebCache']) {
-        // TODO: APC reset script
+
+        if (isset($configuration['HTTPAuthDeployment']) && !empty($configuration['HTTPAuthDeployment'])) {
+            $workflow->setTaskOptions(
+                'TYPO3\Surf\Task\Php\WebOpcacheResetExecuteTask',
+                [
+                    'baseUrl'            => $configuration['baseUrl'],
+                    'scriptIdentifier'   => time() . 'isOnMySide',
+                    'stream_context'     => [
+                            'http'       => [
+                                'header' => 'Authorization: Basic ' . base64_encode($configuration['HTTPAuthDeployment']),
+                            ],
+                    ],
+                ]
+            );
+        }
+
         $workflow->beforeStage('transfer', \TYPO3\Surf\Task\Php\WebOpcacheResetCreateScriptTask::class, $application)
             ->afterStage('switch', \TYPO3\Surf\Task\Php\WebOpcacheResetExecuteTask::class, $application);
-
-        // TODO: Respect HTTPAuthDeployment credentials for calling.
     }
 });
 

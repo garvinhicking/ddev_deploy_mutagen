@@ -13,7 +13,7 @@
 $configuration = [
     // This is just a name which describes the deployed application (used for verbose output, logfiles - no special characters please)
     'applicationName'           => 'typo3-surf',
-    'baseUrl'                   => 'https://deployment.typo3-surf.ddev.site',
+    'baseUrl'                   => 'https://deployment.typo3-surf.ddev.site/',
 
     // The remote GIT repository to clone as a base for the deployment
     // Surf need read access for this repository e.g. by setting a deploy key in the GitHub repository settings
