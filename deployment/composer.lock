@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c0aa00bb78faaea4a6ad92345711873f",
+    "content-hash": "de948b97ef755e07a1ec55b545379db1",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -2894,16 +2894,16 @@
         },
         {
             "name": "typo3/surf",
-            "version": "3.3.0",
+            "version": "3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TYPO3/Surf.git",
-                "reference": "739985daff575b6abd00ecc39b26b0ead0e7aa8e"
+                "reference": "c0379d64707177eb945740f2068a4c31cf917a1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TYPO3/Surf/zipball/739985daff575b6abd00ecc39b26b0ead0e7aa8e",
-                "reference": "739985daff575b6abd00ecc39b26b0ead0e7aa8e",
+                "url": "https://api.github.com/repos/TYPO3/Surf/zipball/c0379d64707177eb945740f2068a4c31cf917a1a",
+                "reference": "c0379d64707177eb945740f2068a4c31cf917a1a",
                 "shasum": ""
             },
             "require": {
@@ -2926,12 +2926,13 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.0",
                 "jangregor/phpstan-prophecy": "^1.0",
+                "phpspec/prophecy": "^1.15",
                 "phpstan/extension-installer": "^1.1",
                 "phpstan/phpstan": "^1.0",
                 "phpstan/phpstan-phpunit": "^1.0",
                 "phpstan/phpstan-webmozart-assert": "^1.0",
                 "phpunit/phpunit": "^8.0",
-                "rector/rector": "^0.12",
+                "rector/rector": "^0.14",
                 "slevomat/coding-standard": "^7.0",
                 "squizlabs/php_codesniffer": "^3.6",
                 "timeweb/phpstan-enum": "^3.0"
@@ -2959,8 +2960,9 @@
             ],
             "description": "TYPO3 Surf is a deployment tool, suited for a wide variety of applications",
             "support": {
+                "docs": "https://docs.typo3.org/other/typo3/surf/main/en-us/",
                 "issues": "https://github.com/TYPO3/Surf/issues",
-                "source": "https://github.com/TYPO3/Surf/tree/3.3.0"
+                "source": "https://github.com/TYPO3/Surf"
             },
             "funding": [
                 {
@@ -2976,7 +2978,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-22T00:13:41+00:00"
+            "time": "2022-11-11T23:09:14+00:00"
         },
         {
             "name": "webmozart/assert",
