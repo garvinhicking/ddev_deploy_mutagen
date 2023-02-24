@@ -59,6 +59,7 @@ The `composer.json` now also only defines `"extra"."typo3/cms"."web-dir":"htdocs
 ### Advantages of a root composer.json:
 * Better phpstorm integration
 * TYPO3 Surf standard compliant
+* We can finally use WebOpcacheReset because the path can be resolved through `webDirectory` without a prefix on it!
 
 ### Disadvantages of a root composer.json:
 * It's no longer as isolated on what is used for the web-side of things, and what other stuff a repository delivers. `vendor` is now in the root instead of `htdocs/vendor`.
