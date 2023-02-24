@@ -8,7 +8,6 @@ const cssMinify = require("gulp-clean-css");
 const jsMinify = require("gulp-terser");
 const webpack = require("webpack-stream");
 const concat = require("gulp-concat");
-const webp = require("gulp-webp");
 const addVersionString  = require("gulp-version-number");
 
 const versionConfig = {
