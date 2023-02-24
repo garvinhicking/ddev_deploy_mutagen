@@ -1,0 +1,184 @@
+.service__teaser {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    &__list {
+        .swiper-controls {
+            margin-top: rem(30);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: rem(30);
+
+            @include mq(lg) {
+                margin-top: 0;
+            }
+        }
+
+        .swiper-pagination {
+            @media screen and (max-width: 1023px) {
+                bottom: rem(-30) !important;
+                position: static;
+                width: auto;
+            }
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--nabu-blue);
+
+            &:hover {
+                color: var(--nabu-darkblue);
+            }
+
+            &::after {
+                font-family: "Font Awesome 6 Pro";
+            }
+
+            @include mq(lg) {
+                transform: translateY(100%);
+            }
+
+            @media screen and (max-width: 1023px) {
+                top: auto;
+                left: auto;
+                right: auto;
+                position: relative;
+                margin-top: 0;
+                height: auto;
+
+                &::after {
+                    font-size: rem(24);
+                }
+            }
+        }
+
+        .swiper-button-prev {
+            &::after {
+                content: "\f053";
+            }
+            @include mq(lg) {
+                left: rem(-35);
+            }
+        }
+        .swiper-button-next {
+            &::after {
+                content: "\f054";
+            }
+            @include mq(lg) {
+                right: rem(-35);
+            }
+        }
+    }
+
+    &__image {
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+
+        img {
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        a {
+            img {
+                aspect-ratio: 1 / 1;
+                height: auto;
+                object-fit: cover;
+                object-position: top center;
+                transition: all 0.3s ease;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                background-color: transparent;
+            }
+        }
+    }
+
+    &__badge {
+        position: absolute;
+        left: rem(30);
+        top: 0;
+        width: rem(100);
+        z-index: 1;
+        pointer-events: none;
+
+        img {
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: auto;
+        }
+    }
+
+    &__body {
+        color: var(--white);
+        font-size: rem(18);
+        line-height: rem(24);
+        padding: rem(15) rem(20) rem(30);
+
+        @include mq(lg) {
+            padding-bottom: rem(45);
+
+            p {
+                margin-bottom: rem(25);
+            }
+        }
+    }
+
+    &--blue {
+        .service__teaser__body {
+            background-color: var(--nabu-blue);
+            color: var(--white);
+        }
+    }
+    &--green {
+        .service__teaser__body {
+            background-color: var(--nabu-green);
+            color: var(--white);
+        }
+    }
+    &--orange {
+        .service__teaser__body {
+            background-color: var(--nabu-orange);
+            color: var(--white);
+        }
+    }
+    &--red {
+        .service__teaser__body {
+            background-color: var(--nabu-red);
+            color: var(--white);
+        }
+    }
+
+    &:hover {
+        .service__teaser__image a img {
+            transform: scale(1.1);
+        }
+
+        .btn--blue {
+            background-color: var(--nabu-darkblue);
+        }
+        .btn--green {
+            background-color: var(--nabu-darkgreen);
+        }
+        .btn--orange {
+            background-color: var(--nabu-darkorange);
+        }
+        .btn--red {
+            background-color: var(--nabu-darkred);
+        }
+        .btn--yellow {
+            background-color: var(--nabu-darkyellow);
+        }
+    }
+}

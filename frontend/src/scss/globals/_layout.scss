@@ -1,0 +1,39 @@
+:root {
+    /* Container Width */
+    --container-width: 90vw;
+}
+
+.tabindex {
+    &:focus {
+        outline: none;
+    }
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    position: relative;
+
+    @include mq(lg) {
+        --container-width: 940px;
+    }
+}
+
+.section {
+    padding: rem(30);
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    @include mq(md) {
+        padding: rem(50) 0;
+
+        h2:first-child {
+            line-height: 1;
+        }
+    }
+}
+
+.grid {
+    display: grid;
+}

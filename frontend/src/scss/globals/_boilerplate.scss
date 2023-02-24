@@ -1,0 +1,36 @@
+html {
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    font-family: inherit;
+}
+
+:root {
+    --swiper-pagination-bullet-width: 15px;
+    --swiper-pagination-bullet-height: 15px;
+    --swiper-pagination-bullet-inactive-color: var(--white);
+    --swiper-pagination-bullet-inactive-opacity: 0.5;
+    --swiper-pagination-color: var(--white);
+    --swiper-pagination-bullet-horizontal-gap: 6px;
+    --swiper-navigation-size: 24px;
+}
+
+body {
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+    background-color: var(--white);
+    //overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}

@@ -1,0 +1,30 @@
+.page {
+    &__intro {
+        padding: rem(30) 0;
+
+        &__text {
+            max-width: 800px;
+            margin: auto;
+            font-size: rem(18);
+            line-height: rem(24);
+            margin-bottom: rem(35);
+            text-align: center;
+
+            @include mq(md) {
+                font-size: rem(24);
+                line-height: rem(32);
+            }
+        }
+
+        &__buttons {
+            display: flex;
+            justify-content: space-between;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        @include mq(md) {
+            padding: rem(50) 0;
+        }
+    }
+}

@@ -1,0 +1,151 @@
+.newsletter__dialog {
+  form button.btn--arrow {
+    border: 0;
+  }
+
+  &__icon {
+    font-size: rem(32);
+    color: var(--white);
+    display: inline-block;
+    line-height: 1;
+    margin: 0 0 rem(20);
+  }
+
+  h1 {
+    font-size: rem(28);
+    color: var(--white);
+    margin: rem(20) 0 rem(10);
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  h2 {
+    font-size: rem(20);
+    color: var(--white);
+    margin: 0 0 rem(25);
+    font-weight: 600;
+  }
+
+  &__input {
+    margin: 0 0 rem(25);
+    input {
+      max-width: rem(215);
+      width: 100%;
+      height: 3rem;
+      border-radius: rem(7);
+      padding: 0 rem(10);
+      line-height: rem(30);
+      font-size: 1rem;
+      border: none;
+    }
+  }
+
+  &__captcha {
+    margin: 0 0 rem(25);
+  }
+
+  .btn {
+    width: rem(215);
+  }
+
+  p {
+    color: var(--white);
+    font-size: rem(14);
+    line-height: rem(24);
+    margin: rem(25) 0 0;
+
+    a {
+      text-decoration: underline;
+      color: inherit;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.dialog-container,
+.dialog-overlay {
+  position: fixed; /* 1 */
+  top: 0; /* 1 */
+  right: 0; /* 1 */
+  bottom: 0; /* 1 */
+  left: 0; /* 1 */
+}
+
+/**
+  * 1. Make sure the dialog container and all its descendants sits on
+  *    top of the rest of the page.
+  * 2. Make the dialog container a flex container to easily center the
+  *    dialog.
+  */
+.dialog-container {
+  z-index: 2; /* 1 */
+  display: flex; /* 2 */
+}
+
+/**
+  * 1. Make sure the dialog container and all its descendants are not
+  *    visible and not focusable when it is hidden.
+  */
+.dialog-container[aria-hidden='true'] {
+  display: none; /* 1 */
+}
+
+/**
+  * 1. Make the overlay look like an overlay.
+  */
+.dialog-overlay {
+  background-color: rgb(0 0 0 / 0.6); /* 1 */
+  animation: fade-in 200ms both;
+}
+
+/**
+  * 1. Vertically and horizontally center the dialog in the page.
+  * 2. Make sure the dialog sits on top of the overlay.
+  * 3. Make sure the dialog has an opaque background.
+  */
+.dialog-content {
+  margin: auto; /* 1 */
+  z-index: 2; /* 2 */
+  position: relative; /* 2 */
+  background-color: var(--nabu-blue); /* 3 */
+  text-align: center;
+  animation: fade-in 400ms 200ms both, slide-up 400ms 200ms both;
+  padding: rem(20);
+  max-width: rem(788);
+  width: 100%;
+  border-radius: rem(7);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(10%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog-overlay,
+  .dialog-content {
+    animation: none;
+  }
+}
+
+.dialog-close {
+  position: absolute;
+  top: rem(20);
+  right: rem(20);
+  border: 0;
+  background-color: transparent;
+  color: var(--white);
+  font-size: rem(30);
+  cursor: pointer;
+}
+

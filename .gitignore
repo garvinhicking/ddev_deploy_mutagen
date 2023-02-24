@@ -1,16 +1,22 @@
 .idea/
-vagrant/.vagrant
-htdocs/vendor
 /*.sql
-
+!/init.sql
 
 /deployment/workspace/*
 !/deployment/workspace/.gitignore
 !/deployment/workspace/README.txt
+deployment/vendor/
 
-htdocs/web/index.php
-htdocs/web/typo3
-htdocs/web/typo3temp
-htdocs/var
+/htdocs/index.php
+/htdocs/typo3
+/htdocs/typo3temp
+/htdocs/fileadmin
+/htdocs/FIRST_INSTALL
+/var
+/vendor
+/frontend/node_modules/
+/frontend/dist/
 
 .ddev/docker-compose.mutagen.yml
+
+deployment_target/releases/20*

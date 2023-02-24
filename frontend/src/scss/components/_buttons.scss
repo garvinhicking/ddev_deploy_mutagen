@@ -1,0 +1,115 @@
+.btn {
+    font-size: 16px;
+    color: var(--white);
+    font-weight: 600;
+    border-radius: 7px;
+    padding: 7px 15px;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 1;
+
+    &--no-border {
+        border: 0;
+    }
+
+    &--border {
+        border: 1px solid var(--white);
+    }
+
+    &--blue {
+        background-color: var(--nabu-blue);
+
+        &:hover {
+            background-color: var(--nabu-darkblue);
+        }
+
+        &--inv {
+            background-color: var(--white);
+            color: var(--nabu-blue);
+            border: 1px solid var(--nabu-blue);
+
+            &:hover {
+                background-color: var(--nabu-blue);
+                border: 1px solid var(--white);
+                color: var(--white);
+            }
+        }
+    }
+
+    &--orange {
+        background-color: var(--nabu-orange);
+
+        &:hover {
+            background-color: var(--nabu-darkorange);
+        }
+
+        &--inv {
+            background-color: var(--white);
+            color: var(--nabu-orange);
+            border: 1px solid var(--nabu-orange);
+
+            &:hover {
+                background-color: var(--nabu-orange);
+                border: 1px solid var(--white);
+                color: var(--white);
+            }
+        }
+    }
+
+    &--green {
+        background-color: var(--nabu-green);
+
+        &:hover {
+            background-color: var(--nabu-darkgreen);
+        }
+    }
+
+    &--red {
+        background-color: var(--nabu-red);
+
+        &:hover {
+            background-color: var(--nabu-darkred);
+        }
+    }
+
+    &--lg {
+        font-size: rem(30);
+        font-weight: 700;
+    }
+
+    &--arrow {
+        position: relative;
+        padding: rem(7) rem(15) rem(7) rem(35);
+        &::before {
+            content: "\f061";
+            font-family: var(--fa-style-family-classic);
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &-right {
+            position: relative;
+            padding: rem(9) rem(45) rem(9) rem(20);
+            &::before {
+                content: "";
+                left: auto;
+                transform: none;
+            }
+
+            &::after {
+                content: "\f061";
+                font-family: var(--fa-style-family-classic);
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            @include mq(lg) {
+                padding: rem(15) rem(60) rem(15) rem(30);
+            }
+        }
+    }
+}

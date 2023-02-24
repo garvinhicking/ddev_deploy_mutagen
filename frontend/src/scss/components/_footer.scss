@@ -1,0 +1,187 @@
+.footer {
+    &__top {
+        padding: rem(30);
+        background-color: var(--white);
+
+        @include mq(md) {
+            padding: rem(50) 0;
+        }
+    }
+
+    &__main {
+        background-color: var(--nabu-blue);
+        color: var(--white);
+        padding: rem(30) 0;
+
+        p {
+            a {
+                color: var(--white);
+            }
+        }
+
+        h2 {
+            font-size: rem(16);
+            font-weight: 700;
+            margin: 0 0 .325rem;
+        }
+    }
+
+    &__columns {
+        display: flex;
+        flex-direction: column;
+
+        @include mq(lg) {
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-direction: row;
+        }
+    }
+
+    &__column {
+        margin-bottom: rem(40);
+
+        &__select {
+            position: relative;
+            margin-bottom: 0;
+            width: rem(275);
+
+            &::after {
+                content: "\f078";
+                font-family: "Font Awesome 6 Pro";
+                position: absolute;
+                right: rem(10);
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: rem(18);
+                color: var(--nabu-blue);
+                z-index: 1;
+                pointer-events: none;
+            }
+        }
+
+        &__map {
+            position: relative;
+            > img {
+                float: right;
+                margin-top: rem(-30);
+                width: rem(155);
+            }
+
+            .dates-button {
+                color: var(--nabu-blue);
+                background-color: var(--white);
+                padding: rem(6) rem(8);
+                border: 0;
+                border-radius: rem(6);
+                font-weight: 600;
+                font-size: rem(14);
+                display: inline-block;
+                min-width: rem(150);
+
+                &::before {
+                    content: "\f061";
+                    font-family: "Font Awesome 6 Pro";
+                    display: inline-block;
+                    margin-right: rem(5);
+                }
+
+                &:hover {
+                    background-color: var(--nabu-darkblue);
+                    color: var(--white);
+                }
+            }
+
+            form {
+                margin-top: rem(5);
+
+                select {
+                    width: 100%;
+                    appearance: none;
+                    border: 0;
+                    border-radius: rem(6);
+                    background-color: var(--white);
+                    font-size: rem(14);
+                    color: var(--nabu-blue);
+                    padding: rem(6) rem(8);
+                    font-weight: 600;
+                    outline: none;
+                    z-index: 1;
+                    position: relative;
+                    font-family: inherit;
+                }
+            }
+        }
+
+        object {
+            margin-top: rem(20);
+        }
+
+        nav {
+            ul {
+                padding: 0;
+                margin-top: 0;
+                list-style-type: none;
+
+                li {
+                    a {
+                        color: var(--white);
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+
+        &:first-child {
+            @include mq(lg) {
+                order: 2;
+                flex: 0 0 rem(275);
+            }
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        @include mq(lg) {
+            margin-bottom: 0;
+        }
+    }
+
+    &__buttons {
+        padding-top: rem(4);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        > * + * {
+            margin-top: rem(20);
+        }
+    }
+
+    &__metanavigation {
+        
+        margin-bottom: rem(20);
+        ul {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 0;
+
+            li +li {
+                margin-left: rem(20);
+            }
+        }
+    }
+
+    &__social {
+        h2 {
+            margin-bottom: rem(13);
+        }
+        i {
+            font-size: rem(26);
+        }
+    }
+}

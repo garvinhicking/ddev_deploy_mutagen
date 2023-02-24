@@ -1,0 +1,209 @@
+.news {
+    margin-bottom: rem(25);
+
+    > article {
+        .news__item__teaser {
+            background-color: var(--nabu-lightblue);
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        &__image {
+            overflow: hidden;
+            order: 0;
+            aspect-ratio: 16 / 9;
+
+            img {
+                display: block;
+                width: 100%;
+                aspect-ratio: 16 / 9;
+                object-fit: cover;
+                transition: all 0.3s ease;
+            }
+        }
+
+
+        &__teaser {
+            order: 1;
+            background-color: var(--nabu-lightgrey);
+            padding: rem(20) rem(25) rem(30);
+            flex: 1;
+
+            h3 {
+                color: var(--nabu-blue);
+                font-size: 24px;
+                font-weight: 700;
+                margin-bottom: rem(10);
+
+                a {
+                    color: var(--nabu-blue);
+                    transition: 0.2s ease;
+
+                    &:hover {
+                        color: var(--nabu-orange);
+                    }
+
+                    &:focus {
+                        text-decoration: underline;
+                        color: var(--nabu-orange);
+                    }
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        top: 0;
+                        bottom: 0;
+                        z-index: 1;
+                    }
+                }
+            }
+
+            h4 {
+                color: var(--nabu-greygreen);
+                font-size: 20px;
+                font-weight: 700;
+                margin-bottom: rem(20);
+            }
+
+            p {
+                font-size: rem(18);
+                line-height: rem(24);
+                margin: 0;
+
+                i {
+                    color: var(--nabu-blue);
+                    left: 5px;
+                    position: relative;
+                    z-index: 0;
+                    transition: 0.2s ease;
+                    vertical-align: middle;
+                }
+            }
+        }
+
+        &:hover {
+            i {
+                color: var(--nabu-darkblue);
+            }
+
+            .news__item__image img {
+                transform: scale(1.1);
+            }
+        }
+
+    }
+
+    &__slider__container {
+        margin-top: rem(30);
+        position: relative;
+        .news__item {
+            h3 {
+                font-size: rem(20);
+            }
+
+            h4 {
+                font-size: rem(18);
+            }
+        }
+
+        .swiper-controls {
+            margin-top: rem(15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: rem(30);
+
+            @include mq(md) {
+                margin-top: rem(30);
+            }
+            @include mq(lg) {
+                margin-top: 0;
+            }
+        }
+
+        .swiper-pagination {
+            @media screen and (max-width: 1023px) {
+                bottom: rem(-30) !important;
+                position: static;
+                width: auto;
+            }
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--nabu-blue);
+
+            &:hover {
+                color: var(--nabu-darkblue);
+            }
+
+            &::after {
+                font-family: "Font Awesome 6 Pro";
+            }
+            @media screen and (max-width: 1023px) {
+                top: auto;
+                left: auto;
+                right: auto;
+                position: relative;
+                margin-top: 0;
+
+                &::after {
+                    font-size: rem(24);
+                }
+            }
+        }
+
+        .swiper-button-prev {
+            &::after {
+                content: "\f053";
+            }
+            @include mq(lg) {
+                left: rem(-35);
+            }
+        }
+        .swiper-button-next {
+            &::after {
+                content: "\f054";
+            }
+            @include mq(lg) {
+                right: rem(-35);
+            }
+        }
+    }
+
+    &__readmore {
+        text-align: center;
+        a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+
+            > svg {
+                margin-right: 10px;
+            }
+
+            span {
+                font-size: 16px;
+                font-weight: 600;
+                border-bottom: 1px solid transparent;
+            }
+
+            &:hover {
+                > span {
+                    border-bottom: 1px solid var(--white);
+                }
+            }
+        }
+    }
+
+    @include mq(lg) {
+        margin-bottom: rem(50);
+    }
+}

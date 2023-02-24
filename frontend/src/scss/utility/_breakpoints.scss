@@ -1,0 +1,19 @@
+$sm: 600px; // (min-width: 600px)
+$md: 768px; // (min-width: 768px)
+$lg: 1024px; // (min-width: 1024px)
+$xl: 1576px; // (min-width: 1024px)
+
+$breakpoints: (
+    sm: $sm,
+    md: $md,
+    lg: $lg,
+    xl: $xl,
+);
+
+@mixin mq($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+            @content;
+        }
+    }
+}

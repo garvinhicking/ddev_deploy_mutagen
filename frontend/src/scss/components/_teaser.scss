@@ -1,0 +1,296 @@
+.teaser {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+
+    @include mq(lg) {
+        gap: rem(45);
+    }
+
+    &__image {
+        flex-shrink: 0;
+        flex-grow: 1;
+        flex-basis: 100%;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            object-position: top;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            img {
+                transform: scale(1.1);
+            }
+        }
+
+        a::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+        }
+
+
+        @include mq(md) {
+            flex-basis: 55%;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        @include mq(lg) {
+            flex-basis: rem(527);
+        }
+    }
+
+    &__content {
+        padding: rem(25) rem(20);
+        transition: all 0.3s ease;
+
+        h3 {
+            font-size: rem(24);
+            margin-bottom: rem(10);
+
+            @include mq(md) {
+                font-size: rem(28);
+            }
+        }
+
+        h4 {
+            font-size: rem(20);
+            margin-bottom: rem(10);
+        }
+
+        &__line {
+            margin: rem(20) 0;
+            color: var(--white);
+            border: none; // reset border styles
+            border-bottom: 1px solid var(--white);
+        }
+
+        p {
+            font-size: rem(18);
+            line-height: rem(24);
+        }
+
+        &__button {
+            margin-top: rem(20);
+            text-align: center;
+
+            @include mq(md) {
+                text-align: left;
+            }
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        @include mq(md) {
+            flex-direction: row;
+        }
+
+        &--green {
+            .teaser__content {
+                background-color: var(--nabu-green);
+                color: var(--white);
+            }
+
+            &:hover {
+                .teaser__content__button a {
+                    background-color: var(--nabu-darkgreen);
+                }
+            }
+        }
+        &--blue {
+            .teaser__content {
+                background-color: var(--nabu-blue);
+                color: var(--white);
+            }
+
+            &:hover {
+                .teaser__content__button a {
+                    background-color: var(--nabu-darkblue);
+                }
+            }
+        }
+        &--red {
+            .teaser__content {
+                background-color: var(--nabu-red);
+                color: var(--white);
+            }
+
+            &:hover {
+                .teaser__content__button a {
+                    background-color: var(--nabu-darkred);
+                }
+            }
+        }
+
+        &--orange {
+            .teaser__content {
+                background-color: var(--nabu-orange);
+                color: var(--white);
+            }
+
+            &:hover {
+                .teaser__content__button a {
+                    background-color: var(--nabu-darkorange);
+                }
+            }
+        }
+
+        &:focus-within {
+            box-shadow: 0 0 0 0.25rem;
+
+            a:focus-visible {
+                text-decoration: none;
+                outline: none;
+            }
+        }
+    }
+
+    &__readmore {
+        display: flex;
+        justify-content: center;
+        max-width: 400px;
+        margin: rem(30) auto 0;
+
+        @include mq(md) {
+            margin: rem(50) auto 0;
+        }
+    }
+
+    &__grid {
+        grid-template-columns: 100%;
+        grid-gap: rem(30);
+
+        @include mq(md) {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: minmax(min-content, max-content);
+        }
+
+        .teaser__image {
+            width: 100%;
+            aspect-ratio: 3 / 2;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .teaser__content {
+            background-color: var(--white);
+            flex: 1;
+
+            p {
+                font-size: rem(18);
+                line-height: rem(24);
+                margin: 0;
+            }
+
+            h3 {
+                font-size: rem(20);
+                font-weight: 700;
+                a {
+                    color: var(--nabu-blue);
+                    transition: 0.2s ease;
+
+                    &:hover {
+                        color: var(--nabu-orange);
+                    }
+                }
+            }
+
+            i {
+                color: var(--nabu-blue);
+                display: inline-block;
+                position: relative;
+                left: 5px;
+                transition: 0.2s ease;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    &--tipp {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--white);
+        position: relative;
+
+        h3 {
+            color: var(--nabu-blue);
+            font-size: rem(20);
+            font-weight: 700;
+            margin-bottom: rem(10);
+        }
+
+        .teaser__image {
+            aspect-ratio: 3 / 2;
+            flex-basis: auto !important;
+            flex-grow: 0;
+            flex-shrink: 1;
+
+            img {
+                order: -1;
+                width: 100%;
+                height: auto !important;
+                object-fit: cover;
+
+            }
+
+            a::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 2;
+            }
+        }
+
+        &__content {
+            flex: 1;
+            transition: 0.2s ease-in-out;
+
+            h3 a, i {
+                color: var(--nabu-blue);
+            }
+        }
+
+        &:hover {
+            .teaser__content {
+                background-color: var(--nabu-blue);
+                color: var(--white);
+            }
+
+            .teaser__content i, h3 {
+                color: var(--white) !important;
+            }
+
+
+        }
+
+        &:focus-within {
+            box-shadow: 0 0 0 0.25rem;
+
+            a:focus-visible {
+                text-decoration: none;
+                outline: none;
+            }
+        }
+    }
+}

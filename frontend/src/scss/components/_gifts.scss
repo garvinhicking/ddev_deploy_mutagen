@@ -1,0 +1,37 @@
+.gifts {
+    background-color: var(--nabu-orange);
+    display: flex;
+    flex-direction: column;
+
+    &__image {
+        flex-shrink: 0;
+        padding: rem(15) rem(40) 0;
+        display: flex;
+        align-items: center;
+
+        img {
+            max-width: rem(128);
+            width: 100%;
+        }
+
+        @include mq(md) {
+            padding: 0 rem(40);
+        }
+    }
+
+    &__body {
+        color: var(--white);
+        font-size: rem(18);
+        padding: rem(20);
+
+        h3 {
+            font-size: rem(28);
+            font-weight: 600;
+            margin-bottom: rem(20);
+        }
+    }
+
+    @include mq(md) {
+        flex-direction: row;
+    }
+}

@@ -1,0 +1,44 @@
+.image-of-month {
+    &__image {
+        margin: 0;
+        overflow: hidden;
+
+        img {
+            transition: all 0.3s ease;
+        }
+    }
+
+    &__caption {
+        background-color: var(--nabu-lightgrey);
+        padding: rem(15);
+        font-size: rem(18);
+        line-height: rem(24);
+        color: var(--text-color);
+        transition: all 0.3s ease;
+
+        i {
+            color: var(--nabu-blue);
+            transition: all 0.2s;
+            position: relative;
+            left: rem(5);
+            vertical-align: middle;
+            line-height: inherit;
+        }
+    }
+
+    a {
+        &:hover {
+            .image-of-month__caption {
+                background-color: var(--nabu-blue);
+                color: var(--white);
+            }
+            i {
+                color: var(--white);
+            }
+
+            img {
+                transform: scale(1.1);
+            }
+        }
+    }
+}

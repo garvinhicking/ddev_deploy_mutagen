@@ -1,6 +1,6 @@
-name: ddev-deploy-mutagen
+name: typo3-surf
 type: typo3
-docroot: htdocs/web/
+docroot: htdocs/
 webserver_type: apache-fpm
 xdebug_enabled: false
 additional_hostnames: []
@@ -11,6 +11,8 @@ mysql_version: ""
 use_dns_when_possible: true
 mutagen_enabled: true
 composer_version: "2"
+additional_hostnames:
+  ['deployment.typo3-surf']
 web_environment:
 - SURF_WORKSPACE=/var/www/html/deployment/workspace
 - SURF_HOME=/var/www/html/deployment
