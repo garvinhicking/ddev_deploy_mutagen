@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "[FE] Init SSH-Server (self-deployment)"
+sudo /etc/init.d/ssh start
+
 echo "[FE] Checking SSH keypairs used for: Deployment to remote machine(s), GIT access"
 
 privateKey=/var/www/html/deployment/ssh/id_rsa
@@ -43,3 +46,6 @@ else
   echo "[FE] [i] PubKey for copy and paste: "
   cat $publicKey
 fi
+
+echo "[FE] Allow self-authorize"
+cat $publicKey >> ~/.ssh/authorized_keys

@@ -19,7 +19,7 @@ web_environment:
 - GIT_SSH_COMMAND=ssh -i /var/www/html/deployment/ssh/id_rsa
 - TYPO3_CONTEXT=Development/Ddev
 disable_settings_management: true
-webimage_extra_packages: [build-essential, joe]
+webimage_extra_packages: [build-essential, joe, openssh-server]
 hooks:
   post-start:
   - exec: bash /var/www/html/.ddev/scripts/ssh-keygen.sh

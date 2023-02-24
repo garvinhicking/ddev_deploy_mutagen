@@ -32,6 +32,15 @@ Credantials are: `admin` : `vagrant123`. Install-Tool Password is `vagrant`.
 
 # Caveats
 
+## SSH
+
+This repository makes ddev install `openssh-server` and starts it via a hook/script:
+
+`/etc/init.d/ssh start`
+`cat /var/www/html/deployment/ssh/id_rsa.pub >> ~/.ssh/authorized_keys`
+
+This is needed to allow the DDEV container to SSH into itself.
+
 ## htdocs
 
 `htdocs/web/` had to be changed to only `htdocs/` in favor of being able to
