@@ -63,8 +63,10 @@ $configuration = [
         '/.gitignore',
         '/vagrant',
         '/deployment',
+        '/deployment_target'
         '/shared',
         '/migration',
+        '/build',
         '/htdocs/uploads',
         '/frontend',
         'readme.md'
