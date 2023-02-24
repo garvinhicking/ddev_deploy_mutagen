@@ -134,7 +134,10 @@ $configuration = [
     // Credentials.php file, missing symlinks, wrong documentroot, missing database, sleep deprevation
     '_sleepDebug'               => false,
     '_sleepDebugTimeout'        => 600,
-    '_sleepDebugTask'           => 'TYPO3\\Surf\\Task\\TYPO3\\CMS\\SetUpExtensionsTask'
+    '_sleepDebugTask'           => 'TYPO3\\Surf\\Task\\TYPO3\\CMS\\SetUpExtensionsTask',
+
+    // Adds the version of configuration for future migrations
+    '_version'                  => '1.0.0'
 ];
 
 require __DIR__ . '/workflow.php';
